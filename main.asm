@@ -102,7 +102,9 @@ csetz
 
 
 
-setup	lda #81
+setup	 
+         
+        lda #81
 		sta quitkey ; store q as the quit key
 		lda #69
 		sta startkey ; store e as the start game key
@@ -129,13 +131,11 @@ setup	lda #81
 		sta controlsscreen
 		
 		jsr clear ;
-		lda #160 ; inverted (aka whiteblock) space character code
-		sta whiteblock ;
+		 
 		lda #$20 ; normal space (aka blackblock) character code
 		sta blackblock ;
 		
-		lda #$19
-		sta appleblock
+		 
 		
 		lda whiteblock ; little whiteblock guy
 		ldx #70
