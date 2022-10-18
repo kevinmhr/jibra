@@ -43,9 +43,9 @@ soundgo3
          sta $d40e
          lda lofreq
          sta $d40f
-         ldx wavefm
-         inx
-         txa
+         ldy wavefm
+         iny
+         tya
          sta $d412
          rts
 
@@ -65,7 +65,24 @@ soundend3
          rts
          
          
-         
+tickingsound
+         jsr soundend1
+         lda #%00000111 ; 0 9
+         sta attdec
+         lda #%00000000 ; 0 0
+         sta susrel
+         lda #15        ; 15
+         sta volume
+      
+         lda whiteblock; 12
+         sta hifreq
+         lda whiteblock         ; 8
+         sta lofreq
+         lda #%00010100       ; 32 saw
+         sta wavefm
+
+         jsr soundgo1
+         rts
          
 lazbeep1
          jsr soundend1
@@ -76,9 +93,9 @@ lazbeep1
          lda #15        ; 15
          sta volume
       
-         lda $9000; 12
+         lda appleblock  
          sta hifreq
-         lda $9000         ; 8
+         lda appleblock       ; 8
          sta lofreq
          lda #%00010100       ; 32 saw
          sta wavefm
@@ -138,15 +155,15 @@ expnoz
 
          jsr soundgo3
          rts
-           lda #0
-         sta $d404     ; wf1
-              lda #0
-         sta $d40b     ; wf2
+     ;      lda #0
+        ; sta $d404     ; wf1
+         ;     lda #0
+       ;  sta $d40b     ; wf2
        
 
  
-         lda #0
-         sta $d412     
+        ; lda #0
+      ;   sta $d412     
          
 attdec   !byte 0
 susrel   !byte 0
