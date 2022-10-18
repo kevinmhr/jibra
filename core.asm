@@ -10,49 +10,49 @@ none	LDA #$FF  ; maximum frequency value, finally made this work
  
 
 blockcorre
-               
-nex                inx 
-                   inx
-		      
-                      stx appleblock
-                    ;stx whiteblock 
-                 
-			
- 
- 			  
+               ldy appleblock
+               iny
+               iny
+               iny
+               iny
+               iny
+               iny
+               sty appleblock
+              		jsr tickingsound
+				 
 
-                    
-                
-				      
-				    
-				     			
 				rts
 				
 				
 nexcol               
 		inx
-		stx $9001
-		txa
-		cmp appleblock
+		inx
+		inx
+		inx
+		inx
+		inx
+		inx
+		inx
+		cpx appleblock
 	    beq nexcol
 stcol					 
-        cmp #00
-        beq nexcol
+         cpx #0
+	    beq stcol
                     
-        sta $c202
+        stx $c202
   
-  
+     
 				 
 					
 		 			
 				    rts
 				
 gameloop	
-    
- 	 jsr nexcol
- 
+     lda #0
+     
      inx
- 
+     jsr nexcol
+    inx
     stx $9000
  
     stx $d021
@@ -61,7 +61,7 @@ gameloop
  
 
    
-		
+		 
 	
 		
 			
@@ -87,11 +87,12 @@ gameloop
 			;jsr scankey
              
            inx
+          
           stx wavefm
 			 
 			jsr movejoy
  			
-			
+		 jsr displayappleposition
 			    jsr blockcorre
 			  
 			ldx #00
@@ -156,7 +157,12 @@ scanjoy
            lda $dc00
            cmp #$7f
            beq setdirection 
+           cmp #$6f
+           beq setdirection 
+           
+           
            sta lastkey
+
            rts
 setdirection	
  rts
@@ -164,6 +170,7 @@ setdirection
 movejoy 
  
                 lda lastkey
+               
                 cmp #$7b   
 				beq left ;
 				cmp #$7e   
@@ -172,9 +179,11 @@ movejoy
 				beq right
 				cmp #$7d   
 				beq down
+				
+			 
 			    
 				 rts
-				
+ 
 directionchange
             	lda lastkey
 				 cmp #$7b   
@@ -469,7 +478,7 @@ addscore		clc
 				inc scoreones
 				jsr lazbeep1
 				jsr lazbeep3
-				
+				 
 				 
  
 				
@@ -484,6 +493,8 @@ addscore		clc
 addtens			inc scoretens
 				lda #00
 				sta scoreones
+				lda #90
+				sta snakespeed
 				rts
 
 addsegmentH		lda snakelengthH
@@ -493,7 +504,7 @@ addsegmentH		lda snakelengthH
 
 increasespeed		lda snakespeed
 					sec
-					sbc #02
+					sbc #03
 					sta snakespeed
 					rts
 
@@ -502,7 +513,7 @@ generaterandomappleposition	jsr generaterandomH
 							
 							rts
 				
-generaterandomH		lda $d41b ;
+generaterandomH		lda $d41c ;
 					cmp #$04 ; make sure we have a 0-4 random number. We can add 4 later to get 04-07 randomly
 					bcs generaterandomH ; keep going till we get what we want
 					clc
@@ -642,13 +653,11 @@ noleftsidescollisionapple	lda applepositionL
 
 delaytop	ldx	#00
 
-delaynest	  
-			inx
-			cpx #$30
+delaynest	inx 
+			cpx #$90
 			 
 			bne delaynest
 			iny
-			stx snakespeed;#$80
+			cpy snakespeed;#$80
 			bne delaytop
 			rts
-
