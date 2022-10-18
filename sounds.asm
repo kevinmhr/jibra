@@ -66,7 +66,7 @@ soundend3
          
          
 tickingsound
-         jsr soundend1
+         jsr soundend2
          lda #%00000111 ; 0 9
          sta attdec
          lda #%00000000 ; 0 0
@@ -81,7 +81,7 @@ tickingsound
          lda #%00010100       ; 32 saw
          sta wavefm
 
-         jsr soundgo1
+         jsr soundgo2
          rts
          
 lazbeep1
