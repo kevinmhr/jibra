@@ -94,8 +94,7 @@ printoption4	lda menutextline5,x
 
 finishedprinting rts
 
-printscore		lda scoretext,x
-				sta $0460,x
+printscore		 
 				
 				lda #01
 				sta $d860,x
