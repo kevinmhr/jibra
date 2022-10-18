@@ -7,15 +7,7 @@ joy= $dc00
 ciatimerinterruptL =	$dc0d
 ciatimerinterruptH = 	$dd0d
 rasterbeam =			$d01a
-;joyup =   $7e
-;joydown =   $7d
-;joyleft =   $7b 
-;joyright =   $77
-;joyunp=  $7f
-joyup =   126
-joydown =   125
-joyleft =   123 
-joyright =   119
+
 joyunp=  $7f
 upkey = 		$c200
 downkey =		$c1ff
@@ -32,6 +24,7 @@ menuscreen = 	$c1f6
 controlsscreen = $c1f5
 optionsscreen = $c1f4
 lastkey=$f6
+ 
 blackblock = 		$c201 ; background space character
 whiteblock = 		$c202 ; collision square block value
 bordercolour = 		$c203
