@@ -28,7 +28,8 @@ collided					brk ; later on can put game over routine here
 collisiongameover	
                      jsr expnoz
                     jsr clear ;
-					
+					lda #100
+				    sta snakespeed
 					jsr inithomescreen
 					
 					jmp menuloop ; later on can put game over routine here	

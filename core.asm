@@ -37,7 +37,7 @@ nexcol
 	    beq nexcol
 stcol					 
          cpx #0
-	    beq stcol
+	    beq nexcol
                     
         stx $c202
   
@@ -53,7 +53,7 @@ gameloop
      inx
      jsr nexcol
     inx
-    stx $9000
+    stx $9001
  
     stx $d021
  
